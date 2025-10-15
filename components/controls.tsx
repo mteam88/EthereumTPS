@@ -26,6 +26,9 @@ export function Controls({
 }: Props) {
   const gasId = useId();
   const yoyId = useId();
+  const yoyMultiplierText = (1 + yoyPercent / 100).toLocaleString(undefined, {
+    maximumFractionDigits: 2,
+  });
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -39,7 +42,9 @@ export function Controls({
               className={cn(
                 "px-3 py-1.5 text-sm border",
                 "first:rounded-l-md last:rounded-r-md -ml-px first:ml-0",
-                metric === m ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900" : "bg-white dark:bg-gray-800"
+                metric === m
+                  ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
+                  : "bg-white dark:bg-gray-800"
               )}
               onClick={() => onMetricChange(m)}
             >
@@ -51,7 +56,7 @@ export function Controls({
 
       <div className="rounded-lg border p-3">
         <label htmlFor={yoyId} className="text-xs mb-2 font-medium block">
-          YoY gas limit increase: {yoyPercent}%
+          YoY gas limit increase: {yoyPercent}% ({yoyMultiplierText}x)
         </label>
         <input
           id={yoyId}
@@ -61,6 +66,9 @@ export function Controls({
           step={5}
           value={yoyPercent}
           onChange={(e) => onYoyChange(Number(e.target.value))}
+          onInput={(e) =>
+            onYoyChange(Number((e.target as HTMLInputElement).value))
+          }
           className="w-full"
         />
       </div>
@@ -102,4 +110,3 @@ export function Controls({
     </div>
   );
 }
-

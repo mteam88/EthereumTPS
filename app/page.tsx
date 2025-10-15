@@ -53,6 +53,20 @@ export default function Page() {
         <p className="text-sm text-gray-600 dark:text-gray-300">
           Starting Dec 2025, initial gas limit 60M, monthly compounding growth.
         </p>
+        <div className="text-xs text-gray-500 space-y-1">
+          <p>
+            <span className="font-medium">Gas per second (GPS):</span> gas
+            capacity available each second, derived from gas limit ÷ block time.
+          </p>
+          <p>
+            <span className="font-medium">Transactions per second (TPS):</span>{" "}
+            estimated tx throughput assuming a chosen gas-per-transaction.
+          </p>
+          <p>
+            <span className="font-medium">Gas limit per block (GLPB):</span>{" "}
+            maximum gas budget allowed in a single block.
+          </p>
+        </div>
       </header>
 
       <section>
@@ -70,15 +84,16 @@ export default function Page() {
 
       <section className="rounded-lg border p-4">
         <div className="mb-2 text-sm text-gray-600 dark:text-gray-300">
-          YoY growth: {yoy}%, Gas/tx: {formatCompact(gasPerTx)}
+          YoY growth: {yoy}% ({(1 + yoy / 100).toFixed(2)}x), Gas/tx:{" "}
+          {formatCompact(gasPerTx)}
         </div>
         <MetricChart series={series} yLabel={yLabel} solanaSeries={solSeries} />
       </section>
 
       <footer className="text-xs text-gray-500">
-        Block time 12s; TPS depends on gas/tx assumption. Solana overlay at 100k TPS.
+        Block time 12s; TPS depends on gas/tx assumption. Solana overlay at 100k
+        TPS.
       </footer>
     </main>
   );
 }
-

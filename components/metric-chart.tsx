@@ -16,7 +16,15 @@ import { Line } from "react-chartjs-2";
 import type { ChartData, ChartDataset } from "chart.js";
 import { formatFull } from "@/lib/format";
 
-ChartJS.register(LineElement, PointElement, LinearScale, TimeScale, Tooltip, Legend, Filler);
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 type Series = {
   label: string;
@@ -31,17 +39,21 @@ type Props = {
 };
 
 export function MetricChart({ series, yLabel, solanaSeries }: Props) {
-  const datasets = useMemo<ChartDataset<'line', { x: Date; y: number }[]>[]>(() => {
-    const base: ChartDataset<'line', { x: Date; y: number }[]>[] = series.map((s) => ({
-      label: s.label,
-      data: s.data,
-      borderColor: s.color,
-      backgroundColor: s.color + "33",
-      fill: false,
-      tension: 0.25,
-      pointRadius: 0,
-      borderWidth: 2,
-    }));
+  const datasets = useMemo<
+    ChartDataset<"line", { x: Date; y: number }[]>[]
+  >(() => {
+    const base: ChartDataset<"line", { x: Date; y: number }[]>[] = series.map(
+      (s) => ({
+        label: s.label,
+        data: s.data,
+        borderColor: s.color,
+        backgroundColor: s.color + "33",
+        fill: false,
+        tension: 0.25,
+        pointRadius: 0,
+        borderWidth: 2,
+      })
+    );
     if (solanaSeries) {
       base.push({
         label: "Solana (100k TPS)",
@@ -53,7 +65,7 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
         pointRadius: 0,
         borderWidth: 2,
         borderDash: [6, 6],
-      } as ChartDataset<'line', { x: Date; y: number }[]>);
+      } as ChartDataset<"line", { x: Date; y: number }[]>);
     }
     return base;
   }, [series, solanaSeries]);
@@ -62,6 +74,7 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
     return {
       responsive: true,
       maintainAspectRatio: false,
+      animation: false,
       interaction: { mode: "nearest", intersect: false },
       scales: {
         x: {
@@ -91,15 +104,14 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
     } as const;
   }, [yLabel]);
 
-  const data = useMemo<ChartData<'line', { x: Date; y: number }[]>>(
+  const data = useMemo<ChartData<"line", { x: Date; y: number }[]>>(
     () => ({ datasets }),
     [datasets]
   );
 
   return (
     <div className="h-[420px] w-full">
-      <Line data={data} options={options} redraw />
+      <Line data={data} options={options} />
     </div>
   );
 }
-
