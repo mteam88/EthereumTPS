@@ -90,9 +90,33 @@ export default function Page() {
         <MetricChart series={series} yLabel={yLabel} solanaSeries={solSeries} />
       </section>
 
-      <footer className="text-xs text-gray-500">
-        Block time 12s; TPS depends on gas/tx assumption. Solana overlay at 100k
-        TPS.
+      <footer className="text-xs text-gray-500 text-center flex flex-col items-center gap-1">
+        <div>
+          Block time 12s; TPS depends on gas/tx assumption. Solana overlay at
+          100k TPS.
+        </div>
+        <div className="flex items-center gap-2">
+          <a
+            href="https://github.com/mteam88/EthereumTPS"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-700 dark:hover:text-gray-300"
+          >
+            GitHub
+          </a>
+          <span>•</span>
+          <span>
+            made with ❤️ by{" "}
+            <a
+              href="https://x.com/mteamisloading"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-700 dark:hover:text-gray-300"
+            >
+              mteam.eth
+            </a>
+          </span>
+        </div>
       </footer>
     </main>
   );

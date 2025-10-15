@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Ethereum Gas Projection",
@@ -16,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-dvh font-sans antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
   );
 }
-
