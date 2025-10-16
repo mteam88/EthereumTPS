@@ -45,7 +45,7 @@ export function solanaReference(
   metric: "GPS" | "TPS" | "GLPB",
   blockTimeSeconds = 12
 ): number {
-  const solanaTps = 100_000; // constant
+  const solanaTps = 3_000; // constant
   if (metric === "TPS") return solanaTps;
   const gps = solanaTps * gasPerTx;
   if (metric === "GPS") return gps;

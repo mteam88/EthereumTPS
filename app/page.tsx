@@ -109,7 +109,7 @@ export default function Page() {
       <footer className="text-xs text-gray-500 text-center flex flex-col items-center gap-1">
         <div>
           Block time 12s; TPS depends on gas/tx assumption. Solana overlay at
-          100k TPS.
+          3k TPS.
         </div>
         <div className="flex items-center gap-2">
           <a

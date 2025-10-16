@@ -93,7 +93,7 @@ export function Controls({
       </div>
 
       <div className="rounded-lg border p-3 flex items-center justify-between">
-        <div className="text-sm">Show Solana 100k TPS</div>
+        <div className="text-sm">Show Solana 3k TPS</div>
         <button
           type="button"
           aria-pressed={showSolana}

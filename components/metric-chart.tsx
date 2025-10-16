@@ -59,7 +59,7 @@ export function MetricChart({ series, yLabel, solanaSeries, yLog }: Props) {
     );
     if (solanaSeries) {
       base.push({
-        label: "Solana (100k TPS)",
+        label: "Solana (3k TPS)",
         data: solanaSeries,
         borderColor: "#10b981",
         backgroundColor: "#10b98133",
