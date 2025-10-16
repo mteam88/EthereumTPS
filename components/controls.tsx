@@ -12,6 +12,8 @@ type Props = {
   onGasPerTxChange: (v: number) => void;
   showSolana: boolean;
   onShowSolanaChange: (v: boolean) => void;
+  useLogScale: boolean;
+  onUseLogScaleChange: (v: boolean) => void;
 };
 
 export function Controls({
@@ -23,6 +25,8 @@ export function Controls({
   onGasPerTxChange,
   showSolana,
   onShowSolanaChange,
+  useLogScale,
+  onUseLogScaleChange,
 }: Props) {
   const gasId = useId();
   const yoyId = useId();
@@ -31,7 +35,7 @@ export function Controls({
   });
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-5">
       <div className="rounded-lg border p-3">
         <div className="text-xs mb-2 font-medium">Metric</div>
         <div className="inline-flex rounded-md shadow-sm" role="group">
@@ -103,6 +107,26 @@ export function Controls({
             className={cn(
               "inline-block h-5 w-5 transform rounded-full bg-white transition-transform",
               showSolana ? "translate-x-5" : "translate-x-1"
+            )}
+          />
+        </button>
+      </div>
+
+      <div className="rounded-lg border p-3 flex items-center justify-between">
+        <div className="text-sm">Y-axis log scale</div>
+        <button
+          type="button"
+          aria-pressed={useLogScale}
+          onClick={() => onUseLogScaleChange(!useLogScale)}
+          className={cn(
+            "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+            useLogScale ? "bg-indigo-500" : "bg-gray-300 dark:bg-gray-700"
+          )}
+        >
+          <span
+            className={cn(
+              "inline-block h-5 w-5 transform rounded-full bg-white transition-transform",
+              useLogScale ? "translate-x-5" : "translate-x-1"
             )}
           />
         </button>

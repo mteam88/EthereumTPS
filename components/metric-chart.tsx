@@ -6,6 +6,7 @@ import {
   LineElement,
   PointElement,
   LinearScale,
+  LogarithmicScale,
   TimeScale,
   Tooltip,
   Legend,
@@ -20,6 +21,7 @@ ChartJS.register(
   LineElement,
   PointElement,
   LinearScale,
+  LogarithmicScale,
   TimeScale,
   Tooltip,
   Legend,
@@ -36,9 +38,10 @@ type Props = {
   series: Series[];
   yLabel: string;
   solanaSeries?: { x: Date; y: number }[]; // optional line series
+  yLog?: boolean;
 };
 
-export function MetricChart({ series, yLabel, solanaSeries }: Props) {
+export function MetricChart({ series, yLabel, solanaSeries, yLog }: Props) {
   const datasets = useMemo<
     ChartDataset<"line", { x: Date; y: number }[]>[]
   >(() => {
@@ -83,6 +86,7 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
           grid: { display: false },
         },
         y: {
+          type: yLog ? ("logarithmic" as const) : ("linear" as const),
           ticks: {
             callback: (v: any) => formatFull(Number(v)),
           },
@@ -102,7 +106,7 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
         },
       },
     } as const;
-  }, [yLabel]);
+  }, [yLabel, yLog]);
 
   const data = useMemo<ChartData<"line", { x: Date; y: number }[]>>(
     () => ({ datasets }),
@@ -110,7 +114,7 @@ export function MetricChart({ series, yLabel, solanaSeries }: Props) {
   );
 
   return (
-    <div className="h-[420px] w-full">
+    <div className="h-[340px] sm:h-[360px] md:h-[380px] w-full">
       <Line data={data} options={options} />
     </div>
   );
